@@ -240,11 +240,21 @@ function convertToDecimal(bin, signed){
 	return finalWorking;
 }
 
+/* convertToBinary(1, 2, 3) =
+  * 1 = Decimal Number, negative or positive
+  * 2 = If it's a signed number, if the number is negative, this will be true regardless of this
+  * 3 = The amount of bits the binary should have
+*/
 
 const b = convertToBinary(-492, true, 12);
 console.log(b);
 
 console.log("\n");
+
+/* convertToDecimal(1, 2) =
+  * 1 = Binary String, removes spaces in the function
+  * 2 = If it's a signed binary integer
+*/
 
 const d = convertToDecimal("0110 0001", true);
 console.log(d);
