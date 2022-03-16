@@ -640,6 +640,6 @@ function hexToDecimal(hex, signed){
 // console.log(hexToOctal("935"));
 // console.log("\n");
 
-console.log(hexToDecimal("6CB", false));
-console.log("\n");
-console.log(hexToDecimal("935", true));
+// console.log(hexToDecimal("6CB", false));
+// console.log("\n");
+// console.log(hexToDecimal("935", true));
