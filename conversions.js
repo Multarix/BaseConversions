@@ -577,17 +577,17 @@ function hexToDecimal(hex, signed){
 
 
 // BINARY to other bases
-// console.log(binaryToOctal("0011 1001 1111"));
+// console.log(binaryToOctal("01110111001100001000100010001001"));
 // console.log("\n");
 // console.log(binaryToOctal("1011 1001 1111"));
 // console.log("\n");
 
-// console.log(binaryToDecimal("0011 1001 1111", true, 12));
+// console.log(binaryToDecimal("0110 0001 1111 1000 1000 1101 0011 1111", true, 32));
 // console.log("\n");
-// console.log(binaryToDecimal("1011 1001 1111", true));
+// console.log(binaryToDecimal("10001001", false));
 // console.log("\n");
 
-// console.log(binaryToHex("0011 1001 1111"));
+// console.log(binaryToHex("01110111 00110000 10001000 10001001"));
 // console.log("\n");
 // console.log(binaryToHex("1011 1001 1111"));
 // console.log("\n");
@@ -612,9 +612,9 @@ function hexToDecimal(hex, signed){
 
 // DECIMAL to other bases
 /* Need to add negative working */
-// console.log(decimalToBinary(1739, false));
+// console.log(decimalToBinary(10, false));
 // console.log("\n");
-// console.log(decimalToBinary(-1739, true, 12));
+// console.log(decimalToBinary(96, true, 12));
 // console.log("\n");
 
 // console.log(decimalToOctal(1739, false));
@@ -629,7 +629,7 @@ function hexToDecimal(hex, signed){
 
 
 // HEX to other bases
-// console.log(hexToBinary("6CB"));
+// console.log(hexToBinary("54"));
 // console.log("\n");
 // console.log(hexToBinary("935"));
 // console.log("\n");
