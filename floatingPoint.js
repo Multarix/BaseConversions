@@ -28,12 +28,12 @@ function convertToBinary(num, totalBits, expLength){
 
 	const decimalString = num.toString();
 	const decimalArray = decimalString.split(".");
-	const leftSide = decimalArray[0]; // 56 .
+	const leftSide = decimalArray[0]; // 56
 
 	const exponantActual = highestPower(parseInt(leftSide));
 
 	const charWithOffset = exponantActual + exponantOffset;
-	let binCharacter = charWithOffset.toString(2);
+	let binCharacter = charWithOffset.toString(2); // Was too lazy to write out more fake binary conversion crap. COMPUTERS DO IT FOR US.
 
 	let baseRemainder = parseInt(leftSide);
 	const leftSideBinaryArray = [];
@@ -48,7 +48,7 @@ function convertToBinary(num, totalBits, expLength){
 	const leftSideBinary = leftSideBinaryArray.join("");
 
 
-	const rightSide = parseFloat("0." + decimalArray[1]); // . 32
+	const rightSide = parseFloat("0." + decimalArray[1]); // 0.32
 
 	let power = -1;
 	let rollingTotal = 0;
@@ -65,12 +65,8 @@ function convertToBinary(num, totalBits, expLength){
 	const rightSideBinary = rightSideBinaryArray.join("");
 	let binMantissa = leftSideBinary + rightSideBinary;
 
-	// Work out the characteristic/ exponant in binary
-
 	while(expLength > binCharacter.length) binCharacter = "0" + binCharacter;
 
-
-	// Work out the mantissa in binary
 	while(mantissaLength > binMantissa.length) binMantissa += "0";
 	if(binMantissa.length > mantissaLength){
 		const binArray = binMantissa.split("");
@@ -100,7 +96,7 @@ function convertToDecimal(bin, expLength){
 	}
 
 	const exponantOffset = Math.pow(2, expLength - 1) - 1;
-	const exponant = parseInt(characteristic, 2) - exponantOffset;
+	const exponant = parseInt(characteristic, 2) - exponantOffset; // Was too lazy to write out more fake binary conversion crap. COMPUTERS DO IT FOR US.
 
 	const mantissa = "1" + binArray.join("");
 
