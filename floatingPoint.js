@@ -42,7 +42,7 @@ function convertToBinary(num, totalBits, expLength){
 
 	// Loop down until we hit -mantissaLength
 	let total = 0;
-	let firstMatch = false;
+	let firstMatch = !!leftSideBinary;
 	let rightSideBinary = "";
 	let largestNegPower = false;
 	for(let i = -1; mantissaLength + 1 > rightSideBinary.length; i--){
@@ -53,7 +53,7 @@ function convertToBinary(num, totalBits, expLength){
 			bit = 1;
 			if(!largestNegPower) largestNegPower = i;
 		}
-		if(bit === 1) firstMatch = true;
+		if(!firstMatch && bit === 1) firstMatch = true;
 		if(firstMatch) rightSideBinary += bit;
 	}
 
@@ -77,7 +77,8 @@ function convertToBinary(num, totalBits, expLength){
 	console.log(`Sign: ${signBit}`);
 	console.log(`Characteristic: ${character}`);
 	console.log(`Mantissa: ${mantissa}`);
-	console.log(`${signBit}${character}${mantissa}`);
+	console.log(`Binary Split: ${signBit} ${character} ${mantissa}`);
+	console.log(`Full Binary: ${signBit}${character}${mantissa}`);
 
 	return `${signBit}${character}${mantissa}`;
 }
@@ -124,7 +125,7 @@ function convertToDecimal(bin, expLength){
 	return rollingTotal;
 }
 
-const num = 0.125;
+const num = 10.25;
 const exp = 5;
 const leng = 12;
 // Number | Total bits | Exponant length
