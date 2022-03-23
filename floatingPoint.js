@@ -4,12 +4,11 @@
  * @argument {boolean} signed - The current power - Only used for the recursion really
  * @returns {number} The highest power of 2 that fits into the first argument
 **/
-const highestPower = (num, pwr = -1) => {
-	const power = Math.pow(2, pwr + 1);
-	if(power >= num) return pwr;
-	return highestPower(num, pwr + 1);
+const highestPower = (num) => {
+	let i = 0;
+	while(num >= Math.pow(2, i + 1)) i += 1;
+	return i;
 };
-
 
 
 /**
@@ -20,62 +19,58 @@ const highestPower = (num, pwr = -1) => {
  * @returns {string} The binary exponant form
 **/
 function convertToBinary(num, totalBits, expLength){
+	// Deal with when the number is exactly 0
+	if(num === 0){
+		let bin = "";
+		while(totalBits > bin.length) bin += "0";
+		return bin;
+	}
+
 	const mantissaLength = totalBits - expLength - 1;
+
+	const signBit = (num < 0) ? 1 : 0;
+	const numArray = num.toString().split(".");
+	const leftSide = numArray[0];
+	const rightSide = numArray[1];
+
+	// Character/ Exponant - Highest power of 2 + the offset
+	const maxPow = highestPower(parseInt(leftSide));
 	const exponantOffset = Math.pow(2, expLength - 1) - 1;
 
-	const sign = (num > 0) ? 0 : 1;
-	if(sign === 1) num *= -1;
+	let character = maxPow + exponantOffset;
+	character = character.toString(2);
+	while(expLength > character.length) character = "0" + character;
 
-	const decimalString = num.toString();
-	const decimalArray = decimalString.split(".");
-	const leftSide = decimalArray[0]; // 56
+	// Mantissa
+	// The left side of the decimal point in binary
+	const leftSideBinary = parseInt(numArray).toString(2).slice(1);
 
-	const exponantActual = highestPower(parseInt(leftSide));
+	// The right side of the decimal point in binary - This requires some maffs
+	const rightSideInt = parseFloat(`0.${rightSide}`);
 
-	const charWithOffset = exponantActual + exponantOffset;
-	let binCharacter = charWithOffset.toString(2); // Was too lazy to write out more fake binary conversion crap. COMPUTERS DO IT FOR US.
-
-	let baseRemainder = parseInt(leftSide);
-	const leftSideBinaryArray = [];
-	while(baseRemainder !== 0){
-		const remainder = baseRemainder % 2;
-		leftSideBinaryArray.push(remainder);
-		baseRemainder = (baseRemainder - remainder) / 2;
+	// Loop down until we hit -mantissaLength
+	let total = 0;
+	let rightSideBinary = "";
+	for(let i = -1; mantissaLength > rightSideBinary.length; i--){
+		let bit = 0;
+		const minPow = Math.pow(2, i);
+		if(rightSideInt >= total + minPow){
+			total += minPow;
+			bit = 1;
+		}
+		rightSideBinary += bit;
 	}
 
-	leftSideBinaryArray.reverse();
-	if(leftSideBinaryArray[0] === 1) leftSideBinaryArray.splice(0, 1); // First number should be a 1
-	const leftSideBinary = leftSideBinaryArray.join("");
+	let mantissa = `${leftSideBinary}${rightSideBinary}`;
+	while(mantissaLength > mantissa.length) mantissa += "0"; // if the mantissa is too short
+	if(mantissa.length > mantissaLength) mantissa = mantissa.slice(0, mantissaLength); // if the mantissa is too long
 
+	// Here would be great to add support for 32bit/64bit rounding - Main goal is just functional 12bit
+	// console.log(`Sign: ${signBit}`);
+	// console.log(`Characteristic: ${character}`);
+	// console.log(`Mantissa: ${mantissa}`);
 
-	const rightSide = parseFloat("0." + decimalArray[1]); // 0.32
-
-	let power = -1;
-	let rollingTotal = 0;
-	const rightSideBinaryArray = [];
-
-	while(mantissaLength > rightSideBinaryArray.length){
-		const mathPower = Math.pow(2, power);
-		const bit = (rollingTotal + mathPower <= rightSide) ? 1 : 0;
-		if(bit) rollingTotal += mathPower;
-		rightSideBinaryArray.push(bit);
-
-		power -= 1;
-	}
-	const rightSideBinary = rightSideBinaryArray.join("");
-	let binMantissa = leftSideBinary + rightSideBinary;
-
-	while(expLength > binCharacter.length) binCharacter = "0" + binCharacter;
-
-	while(mantissaLength > binMantissa.length) binMantissa += "0";
-	if(binMantissa.length > mantissaLength){
-		const binArray = binMantissa.split("");
-		binArray.splice(mantissaLength, binMantissa.length);
-		binMantissa = binArray.join("");
-	}
-
-	const storedBinary = `${sign}${binCharacter}${binMantissa}`;
-	return storedBinary;
+	return `${signBit}${character}${mantissa}`;
 }
 
 
@@ -111,5 +106,7 @@ function convertToDecimal(bin, expLength){
 	return rollingTotal;
 }
 
-console.log(convertToBinary(48.25, 32, 8));
-console.log(convertToDecimal("01000010010000010000000000000000", 8));
+// 				   Number | Total bits | Exponant length
+console.log(convertToBinary(4.8, 12, 5));
+// 								Binary | Exponant length
+// console.log(convertToDecimal("010001000000", 5));
