@@ -131,15 +131,15 @@ function convertToBinary(num, totalBits, expLength){
 		let bestFit = fullBinary;
 		for(const bits of bitPatterns){
 			const newBiny = `${signBit}${character}${preRound}${bits}`;
-			const newPattern = Math.abs(convertToDecimal(newBiny, expLength) - num);
-			const oldPattern = Math.abs(convertToDecimal(bestFit, expLength) - num);
+			const newPattern = Math.abs(convertToDecimal(newBiny, expLength) - num); // Return the absolute value difference from num
+			const oldPattern = Math.abs(convertToDecimal(bestFit, expLength) - num); // Return the absolute value difference from num
 
-			bestFit = (newPattern > oldPattern) ? bestFit : newBiny;
-			mantissa = (newPattern > oldPattern) ? mantissa : `${preRound}${bits}`;
+			if(newPattern > oldPattern) continue; // If the old value is smaller than the new value, we continue
+			bestFit = newBiny;
+			mantissa = `${preRound}${bits}`;
 		}
 		fullBinary = bestFit;
 	}
-
 
 	console.log(`Sign: ${signBit}`);
 	console.log(`Characteristic: ${character}`);
