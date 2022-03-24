@@ -11,79 +11,6 @@ const highestPower = (num) => {
 };
 
 
-/**
- * Converts a floating point (real) number into binary exponant form
- * @argument {number} num - The floating point number to convert
- * @argument {number} totalBits - The amount of total bits that the exponant form has
- * @argument {number} expLength - The length of the exponant/ characteristic
- * @returns {string} The binary exponant form
-**/
-function convertToBinary(num, totalBits, expLength){
-	// Deal with when the number is exactly 0
-	if(num === 0){
-		let bin = "";
-		while(totalBits > bin.length) bin += "0";
-		return bin;
-	}
-	const mantissaLength = totalBits - expLength - 1;
-
-	const signBit = (num < 0) ? 1 : 0;
-	const numArray = num.toString().split(".");
-	const leftSide = numArray[0];
-	const rightSide = numArray[1];
-
-
-	// Mantissa
-	// The left side of the decimal point in binary
-	const leftSideBinary = (leftSide === "0") ? "" : parseInt(leftSide).toString(2);
-
-	// The right side of the decimal point in binary - This requires some maffs
-	const rightSideInt = parseFloat(`0.${rightSide}`);
-
-	// Loop down until we hit -mantissaLength
-	let total = 0;
-	let firstMatch = !!leftSideBinary;
-	let rightSideBinary = "";
-	let largestNegPower = false;
-	for(let i = -1; mantissaLength + 1 > rightSideBinary.length; i--){
-		let bit = 0;
-		const minPow = Math.pow(2, i);
-		if(rightSideInt >= total + minPow){
-			total += minPow;
-			bit = 1;
-			if(!largestNegPower) largestNegPower = i;
-		}
-		if(!firstMatch && bit === 1) firstMatch = true;
-		if(firstMatch) rightSideBinary += bit;
-	}
-
-	let mantissa = `${leftSideBinary}${rightSideBinary}`;
-	mantissa = mantissa.slice(1, mantissa.length);
-	while(mantissaLength > mantissa.length) mantissa += "0"; // if the mantissa is too short
-	if(mantissa.length > mantissaLength) mantissa = mantissa.slice(0, mantissaLength); // if the mantissa is too long
-
-
-	// Character/ Exponant - Highest power of 2 + the offset
-	const maxPow = (leftSide === "0") ? largestNegPower : highestPower(parseInt(leftSide));
-	const exponantOffset = Math.pow(2, expLength - 1) - 1;
-
-	let character = maxPow + exponantOffset;
-	character = character.toString(2);
-	while(expLength > character.length) character = "0" + character;
-	if(character.length > expLength) character = character.slice(0, expLength);
-
-
-	// Here would be great to add support for 32bit/64bit rounding - Main goal is just functional 12bit
-	console.log(`Sign: ${signBit}`);
-	console.log(`Characteristic: ${character}`);
-	console.log(`Mantissa: ${mantissa}`);
-	console.log(`Binary Split: ${signBit} ${character} ${mantissa}`);
-	console.log(`Full Binary: ${signBit}${character}${mantissa}`);
-
-	return `${signBit}${character}${mantissa}`;
-}
-
-
 
 /**
  * Converts a binary exponant into the stored decimal form
@@ -125,10 +52,110 @@ function convertToDecimal(bin, expLength){
 	return rollingTotal;
 }
 
-const num = 10.25;
-const exp = 5;
-const leng = 12;
+
+
+/**
+ * Converts a floating point (real) number into binary exponant form
+ * @argument {number} num - The floating point number to convert
+ * @argument {number} totalBits - The amount of total bits that the exponant form has
+ * @argument {number} expLength - The length of the exponant/ characteristic
+ * @returns {string} The binary exponant form
+**/
+function convertToBinary(num, totalBits, expLength){
+	const standard32Bit = !!(totalBits === 32 && expLength === 8);
+
+	// Deal with when the number is exactly 0
+	if(num === 0){
+		let bin = "";
+		while(totalBits > bin.length) bin += "0";
+		return bin;
+	}
+	const mantissaLength = totalBits - expLength - 1;
+
+	const signBit = (num < 0) ? 1 : 0;
+	const numArray = num.toString().split(".");
+	const leftSide = numArray[0];
+	const rightSide = numArray[1];
+
+
+	// Mantissa
+	// The left side of the decimal point in binary
+	const leftSideBinary = (leftSide === "0") ? "" : parseInt(leftSide).toString(2);
+
+	// The right side of the decimal point in binary - This requires some maffs
+	const rightSideInt = parseFloat(`0.${rightSide}`);
+
+	// Loop down until we hit -mantissaLength + 10 or the target
+	let total = 0;
+	let firstMatch = !!leftSideBinary;
+	let rightSideBinary = "";
+	let largestNegPower = false;
+	for(let i = -1; mantissaLength + 10 > rightSideBinary.length; i--){
+		let bit = 0;
+		const minPow = Math.pow(2, i);
+		if(rightSideInt >= total + minPow){
+			total += minPow;
+			bit = 1;
+			if(!largestNegPower) largestNegPower = i;
+		}
+		if(!firstMatch && bit === 1) firstMatch = true;
+		if(firstMatch) rightSideBinary += bit;
+		if(rightSideInt === total) break;
+	}
+
+	let mantissa = `${leftSideBinary}${rightSideBinary}`;
+	mantissa = mantissa.slice(1, mantissa.length); // Slice off the leading 1
+	while(mantissaLength > mantissa.length) mantissa += "0"; // if the mantissa is too short
+	let truncated = false;
+	if(mantissa.length > mantissaLength){
+		mantissa = mantissa.slice(0, mantissaLength); // if the mantissa is too long
+		truncated = true;
+	}
+
+
+	// Character/ Exponant - Highest power of 2 + the offset
+	const maxPow = (leftSide === "0") ? largestNegPower : highestPower(parseInt(leftSide));
+	const exponantOffset = Math.pow(2, expLength - 1) - 1;
+
+	let character = maxPow + exponantOffset;
+	character = character.toString(2);
+	while(expLength > character.length) character = "0" + character;
+	if(character.length > expLength) character = character.slice(0, expLength);
+
+	let fullBinary = `${signBit}${character}${mantissa}`;
+	console.log(fullBinary);
+
+	if(standard32Bit && truncated){ // Rounding for single precision
+		const bitPatterns = ["000", "001", "010", "011", "100", "101", "110", "111"];
+		const preRound = mantissa.slice(0, mantissa.length - 3);
+		let bestFit = fullBinary;
+		for(const bits of bitPatterns){
+			const newBiny = `${signBit}${character}${preRound}${bits}`;
+			const newPattern = Math.abs(convertToDecimal(newBiny, expLength) - num);
+			const oldPattern = Math.abs(convertToDecimal(bestFit, expLength) - num);
+
+			bestFit = (newPattern > oldPattern) ? bestFit : newBiny;
+			mantissa = (newPattern > oldPattern) ? mantissa : `${preRound}${bits}`;
+		}
+		fullBinary = bestFit;
+	}
+
+
+	console.log(`Sign: ${signBit}`);
+	console.log(`Characteristic: ${character}`);
+	console.log(`Mantissa: ${mantissa}`);
+	console.log(`Binary Split: ${signBit} | ${character} | ${mantissa}`);
+	console.log(`Full Binary: ${fullBinary}`);
+
+	return fullBinary;
+}
+
+
+const num = 10.10;
+const leng = 32;
+const exp = 8;
+
 // Number | Total bits | Exponant length
 // console.log(convertToBinary(num, leng, exp));
 // Binary | Exponant length
-console.log(convertToDecimal(convertToBinary(num, leng, exp), exp));
+console.log("\n", "Converted Binary:", convertToDecimal(convertToBinary(num, leng, exp), exp));
