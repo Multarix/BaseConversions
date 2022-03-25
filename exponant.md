@@ -1,5 +1,4 @@
 <script>const page = "exponant"</script>
-<script defer src="{{ site.baseurl }}/assets/javascript/floatingPoint.js"></script>
 <h1><center><b>Work in Progress - Binary Exponant</b></center></h1>
 <div class="conversionArea center">
 		<form id="exponantForm">
@@ -37,7 +36,7 @@
 		</form>
 		<br>
 		<br>
-		<div class="embed center">
+		<div class="embed divCenter">
 			<br>
 			<br>
 			<br>

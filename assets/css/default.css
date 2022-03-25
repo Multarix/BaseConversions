@@ -19,10 +19,11 @@ body {
 	font-size: 45px;
 }
 
-.center {
+.textCenter {
 	text-align: center;
 }
-div.center {
+
+div.divCenter {
 	margin: auto;
 }
 
@@ -31,9 +32,9 @@ div.embed {
 	background-color: #3A3A3A;
 	border-radius: 5px;
 	border-left: 4px solid #3f3f3f;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 18px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 20px;
 	padding-bottom: 1px;
 	transition: 0.4s;
 }
@@ -64,6 +65,10 @@ div.embed:hover {
 	content: "";
 	display: table;
 	clear: both;
+}
+
+p.conversion {
+	text-align: justify;
 }
 
 @media screen and (max-width: 800px) {
