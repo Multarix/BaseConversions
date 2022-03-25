@@ -1,7 +1,9 @@
 /* General Stuff */
 body {
 	margin: 0px;
-	background-color: #252525;
+	/* background-color: #252525; */
+	background-image: url("../images/bg.png");
+	background-repeat: repeat;
 	color: #e8e8e8;
 	font-size: 15px;
 }
