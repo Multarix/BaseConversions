@@ -1,0 +1,8 @@
+.git
+node_modules
+.eslintrc.json
+test.js
+Gemfile*
+*.txt
+*site*
+*jekyll*

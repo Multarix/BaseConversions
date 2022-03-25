@@ -1,0 +1,102 @@
+/* General Stuff */
+body {
+	margin: 0px;
+	background-color: #252525;
+	color: #e8e8e8;
+	font-size: 15px;
+}
+
+.conversionArea {
+	padding: 20px;
+	margin: auto;
+	width: 80%;
+	background-color: #454545;
+	border-radius: 15px;
+	text-align: center;
+}
+
+.title {
+	font-size: 45px;
+}
+
+.center {
+	text-align: center;
+}
+div.center {
+	margin: auto;
+}
+
+div.embed {
+	width: 80%;
+	background-color: #3A3A3A;
+	border-radius: 5px;
+	border-left: 4px solid #3f3f3f;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 18px;
+	padding-bottom: 1px;
+	transition: 0.4s;
+}
+div.embed:hover {
+	background-color: #282828;
+	border-left: 4px solid #764740;
+	transition: 0.4s;
+}
+.showHide {
+	display: none;
+}
+
+.embedLeft {
+	padding: 5px;
+	text-align: left;
+	float: left;
+	width: 40%;
+	display: inline-flex;
+}
+
+.embedRight {
+	text-align: left;
+	float: left;
+	width: 50%;
+	display: inline-flex;
+}
+.embedRow:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+@media screen and (max-width: 800px) {
+	.columRow {
+		width: auto;
+	}
+	.left {
+		width: auto;
+	}
+	.middle ul, .right ul {
+		margin: 0;
+		overflow: auto;
+	}
+
+	.middle, .right {
+		padding: 0;
+		margin-left: 0;
+		float: none;
+		width: 100%;
+	}
+}
+@media screen and (max-width: 400px) {
+	.embedLeft {
+		width: 100%;
+		text-align: left;
+		margin: 0;
+	}
+	.embedLeft ul {
+		margin: 0;
+	}
+	.embedRight {
+		float: left;
+		width: 100%;
+		text-align: left;
+	}
+}

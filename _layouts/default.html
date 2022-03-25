@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+	<head>
+    	<meta charset="utf-8">
+		<title>Binary Conversions</title>
+		<link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/favicon/favicon.ico">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+		<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/default.css">
+		<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/css/topNav.css">
+		<script defer src="{{ site.baseurl }}/assets/javascript/scripts.js"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  	  	<script src="{{ '/assets/js/respond.js' | relative_url }}"></script>
+    	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	</head>
+  	<body>
+		<div name="top" class="topnav" id="topNav">
+			<div class="topCenter">
+				<a id="home" href="{{ site.baseurl }}/index">BASES</a>
+				<a id="exponant" href="{{ site.baseurl }}/exponant">EXPONANTS</a>
+				<a id="info" href="{{ site.baseurl }}/info">INFO</a>
+				<a id="projects" href="{{ site.baseurl }}/projects">PROJECTS</a>
+				<a href="javascript:void(0);" class="icon" onclick="topNavMobile()">
+					<i class="fa fa-bars"></i>
+				</a>
+			</div>
+		</div>
+<!-- end header -->
+    <div id="wrapper" class="wrapper">
+			<script>document.getElementById("wrapper").style.maxWidth = "750px";</script>
+			<br>
+        {{ content }}
+    </div>
+  </body>
+</html>

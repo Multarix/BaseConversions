@@ -1,0 +1,8 @@
+pre span.bool { color: #d19a66 }
+pre span.string { color: #98c379 }
+pre span.function { color: #61afef }
+pre span.object { color: #e5c07b }
+pre span.keyword { color: #c678dd }
+pre span.comment { color: #5c6370 }
+pre span.json { color: #e06c6b }
+pre span.require { color: #56b6c2 }

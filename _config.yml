@@ -1,1 +1,5 @@
-theme: jekyll-theme-dinky
+title: Binary Conversions
+tagline: Screw you professor
+description: Converts between Binary, Octal, Decimal and Hexadecimal bases
+
+theme: jekyll-theme-midnight
