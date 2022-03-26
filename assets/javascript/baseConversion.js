@@ -648,7 +648,7 @@ function convertToBases(){
 	const reg = new RegExp(pattern, "g");
 	const regArray = value.match(reg);
 
-	if(!value || regArray.length > 0 || parseInt(value) === 0) return inputField.value = ""; // Remove values from the input
+	if(!value || regArray?.length > 0 || parseInt(value) === 0) return inputField.value = ""; // Remove values from the input
 
 	let signed;
 	const signedElems = document.getElementsByName("signed");
