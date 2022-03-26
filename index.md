@@ -16,7 +16,7 @@
 	<div class="conversionContainer" id="binaryContainer">
 		<h3>Binary</h3>
 		<div class="embed divCenter">
-			<p class="conversion" id="bin">
+			<p class="conversion" id="bin" data-content=" ">
 				Convert from Decimal to Binary:<br>
 				15 MOD 2 = 1<br>
 				7 MOD 2 = 1<br>
@@ -30,7 +30,7 @@
 	<div class="conversionContainer" id="octalContainer">
 		<h3>Octal</h3>
 		<div class="embed divCenter">
-			<p class="conversion" id="oct">
+			<p class="conversion" id="oct" data-content=" ">
 				Convert from Decimal to Binary:<br>
 				15 MOD 2 = 1<br>
 				7 MOD 2 = 1<br>
@@ -51,7 +51,7 @@
 	<div class="conversionContainer showHide" id="decimalContainer">
 		<h3>Decimal</h3>
 		<div class="embed divCenter">
-			<p class="conversion" id="dec">
+			<p class="conversion" id="dec" data-content=" ">
 				Decimal to Decimal:<br>
 				15₁₀ = 15₁₀
 			</p>
@@ -61,7 +61,7 @@
 	<div class="conversionContainer" id="hexadecimalContainer">
 		<h3>Hexadecimal</h3>
 		<div class="embed divCenter">
-			<p class="conversion" id="hex">
+			<p class="conversion" id="hex" data-content=" ">
 				Convert from Decimal to Binary:<br>
 				15 MOD 2 = 1<br>
 				7 MOD 2 = 1<br>

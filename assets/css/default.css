@@ -38,12 +38,12 @@ div.embed {
 	padding-right: 15px;
 	padding-top: 20px;
 	padding-bottom: 1px;
-	transition: 0.4s;
+	transition: 500ms;
 }
 div.embed:hover {
 	background-color: #282828;
 	border-left: 4px solid #764740;
-	transition: 0.4s;
+	transition: 500ms;
 }
 .showHide {
 	display: none;
@@ -67,10 +67,6 @@ div.embed:hover {
 	content: "";
 	display: table;
 	clear: both;
-}
-
-p.conversion {
-	text-align: justify;
 }
 
 @media screen and (max-width: 800px) {
@@ -106,4 +102,27 @@ p.conversion {
 		width: 100%;
 		text-align: left;
 	}
+}
+
+
+p.conversion {
+	text-align: justify;
+	content: "";
+}
+
+p.conversion::after {
+	text-align: justify;
+	/* content: attr(data-content); */
+	
+}
+
+.fade {
+	animation: fadeOutIn 1s ease-in-out forwards;
+}
+
+
+@keyframes fadeOutIn {
+	100% { opacity: 100%; }
+	50% { opacity: 0%; }
+	0% { opacity: 100%; }
 }

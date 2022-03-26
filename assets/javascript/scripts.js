@@ -797,6 +797,32 @@ try {
 } catch (e){ null; }
 
 
+function clearNewVal(){
+	const binElem = document.getElementById("bin");
+	const octElem = document.getElementById("oct");
+	const decElem = document.getElementById("dec");
+	const hexElem = document.getElementById("hex");
+
+	binElem.innerHTML = binElem.dataset.content;
+	binElem.dataset.content = " ";
+
+	octElem.innerHTML = octElem.dataset.content;
+	octElem.dataset.content = " ";
+
+	decElem.innerHTML = decElem.dataset.content;
+	decElem.dataset.content = " ";
+
+	hexElem.innerHTML = hexElem.dataset.content;
+	hexElem.dataset.content = " ";
+
+	setTimeout(() => {
+		binElem.classList.remove("fade");
+		octElem.classList.remove("fade");
+		decElem.classList.remove("fade");
+		hexElem.classList.remove("fade");
+	}, 650);
+}
+
 // Convert and Show the working for each base
 function convertToBases(){
 	const fromBase = document.getElementById("fromBase").value.toString();
@@ -836,8 +862,22 @@ function convertToBases(){
 			break;
 	}
 
-	document.getElementById("bin").innerHTML = bin;
-	document.getElementById("oct").innerHTML = oct;
-	document.getElementById("dec").innerHTML = dec;
-	document.getElementById("hex").innerHTML = hex;
+	const binElem = document.getElementById("bin");
+	const octElem = document.getElementById("oct");
+	const decElem = document.getElementById("dec");
+	const hexElem = document.getElementById("hex");
+
+	binElem.dataset.content = bin;
+	binElem.classList.add("fade");
+
+	octElem.dataset.content = oct;
+	octElem.classList.add("fade");
+
+	decElem.dataset.content = dec;
+	decElem.classList.add("fade");
+
+	hexElem.dataset.content = hex;
+	hexElem.classList.add("fade");
+
+	setTimeout(clearNewVal, 500);
 }
