@@ -292,10 +292,10 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 		// convert from binary to hex
 		let moddedNum = num;
 		while(moddedNum.length % 4 !== 0) moddedNum = "0" + moddedNum; // add 0's to the front till % 4 = 0
-		if(moddedNum !== num) conversionWorking.push(`${num} = ${moddedNum}`);
+		// if(moddedNum !== num) conversionWorking.push(`${num} = ${moddedNum}`);
 
 		const binarySplit = moddedNum.match(regex);
-		conversionWorking.push(binarySplit.join(" | "));
+		conversionWorking.push(`${num} = ` + binarySplit.join("-"));
 		for(const nibble of binarySplit){
 			const hex = binaryHexObject[nibble];
 
@@ -339,10 +339,9 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 		// convert from binary to octal
 		let moddedNum = num;
 		while(moddedNum.length % 3 !== 0) moddedNum = "0" + moddedNum; // add 0's to the front till % 3 = 0
-		if(moddedNum !== num) conversionWorking.push(`${num} = ${moddedNum}`);
 
 		const binarySplit = moddedNum.match(regex);
-		conversionWorking.push(binarySplit.join(" | "));
+		conversionWorking.push(`${num} = ` + binarySplit.join("-"));
 		for(const nibble of binarySplit){
 			const binOct = binaryOctalObject[nibble];
 
@@ -374,7 +373,7 @@ function binToOct(binary){ // Working as intended
 	binary = binary.replace(/[^01]*/g, ""); // Clean the binary of anything that isn't a 0 or 1
 	const finalConversion = workingSteps(binary, 2, 8);
 	const working = finalConversion.working.join("\n");
-	const finalString = `Convert from Binary to Octal:\n${working}\n${finalConversion.oldBase + toSub(2)} = ${finalConversion.newBase + toSub(8)}`;
+	const finalString = `<b>Binary to Octal:</b>\n${working}\n${finalConversion.oldBase + toSub(2)} = ${finalConversion.newBase + toSub(8)}`;
 	return finalString;
 }
 
@@ -395,7 +394,7 @@ function binToDec(binary, signed, bits){ // Working as intended
 	while(finalConversion.oldBase.toString().length > equals.length) equals += " ";
 	equals = "\n" + equals + " = ";
 
-	const finalString = `Convert from Binary to Decimal:\n${finalConversion.oldBase} = ` + finalConversion.working.join(equals) + `\n${finalConversion.oldBase + toSub(2)} = ${finalConversion.newBase + toSub(10)}`;
+	const finalString = `<b>Binary to Decimal:</b>\n${finalConversion.oldBase} = ` + finalConversion.working.join(equals) + `\n${finalConversion.oldBase + toSub(2)} = ${finalConversion.newBase + toSub(10)}`;
 	return finalString;
 }
 
@@ -408,7 +407,7 @@ function binToHex(binary){ // Working as intended
 	binary = binary.replace(/[^01]*/g, ""); // Clean the binary of anything that isn't a 0 or 1
 	const finalConversion = workingSteps(binary, 2, 16);
 	const working = finalConversion.working.join("\n");
-	const finalString = `Convert from Binary to HEX:\n${working}\n${finalConversion.oldBase + toSub(2)} = ${finalConversion.newBase + toSub(16)}`;
+	const finalString = `<b>Binary to Hexadecimal:</b>\n${working}\n${finalConversion.oldBase + toSub(2)} = ${finalConversion.newBase + toSub(16)}`;
 	return finalString;
 }
 
@@ -423,7 +422,7 @@ function binToHex(binary){ // Working as intended
 function octToBin(octal){
 	const finalConversion = workingSteps(octal, 8, 2);
 	const working = finalConversion.working.join("\n");
-	const finalString = `Convert from Octal to Binary:\n${working}\n${finalConversion.oldBase + toSub(8)} = ${finalConversion.newBase + toSub(2)}`;
+	const finalString = `<b>Octal to Binary:</b>\n${working}\n${finalConversion.oldBase + toSub(8)} = ${finalConversion.newBase + toSub(2)}`;
 	return finalString;
 }
 
@@ -437,7 +436,7 @@ function octToDec(octal, signed){ // Working as intended
 	// Convert to binary, show working, then convert to decimal and show working
 	const firstConversion = workingSteps(octal, 8, 2); // Convert to binary
 	const firstWorking = firstConversion.working.join("\n");
-	const firstString = `Convert from Octal to Binary:\n${firstWorking}\n${firstConversion.oldBase + toSub(8)} = ${firstConversion.newBase + toSub(2)}\n`;
+	const firstString = `<b>Octal to Binary:</b>\n${firstWorking}\n${firstConversion.oldBase + toSub(8)} = ${firstConversion.newBase + toSub(2)}\n`;
 
 	const finalConversion = workingSteps(firstConversion.newBase, 2, 10, signed); // Convert to decimal
 	finalConversion.working.push(finalConversion.newBase);
@@ -446,7 +445,7 @@ function octToDec(octal, signed){ // Working as intended
 	equals = "\n" + equals + " = ";
 
 	const finalWorking = `${finalConversion.oldBase} = ` + finalConversion.working.join(equals);
-	const finalString = firstString + "\nConvert from Binary to Decimal:\n" + finalWorking + `\n\n${firstConversion.oldBase + toSub(8)} = ${finalConversion.newBase + toSub(10)}`;
+	const finalString = firstString + "\n<b>Binary to Decimal:</b>\n" + finalWorking + `\n\n${firstConversion.oldBase + toSub(8)} = ${finalConversion.newBase + toSub(10)}`;
 
 	return finalString;
 }
@@ -460,11 +459,11 @@ function octToHex(octal){ // Currently Broken
 	// Convert to binary, show working, then convert to hex and show working
 	const firstConversion = workingSteps(octal, 8, 2); // Convert to binary
 	const firstWorking = firstConversion.working.join("\n");
-	const firstString = `Convert from Octal to Binary:\n${firstWorking}\n${firstConversion.oldBase + toSub(8)} = ${firstConversion.newBase + toSub(2)}\n`;
+	const firstString = `<b>Octal to Binary:</b>\n${firstWorking}\n${firstConversion.oldBase + toSub(8)} = ${firstConversion.newBase + toSub(2)}\n`;
 
 	const finalConversion = workingSteps(firstConversion.newBase, 2, 16, true); // Convert to hex
 	const finalWorking = finalConversion.working.join("\n");
-	const finalString = firstString + "\nConvert from Binary to HEX\n" + finalWorking + `\n\n${firstConversion.oldBase + toSub(8)} = ${finalConversion.newBase + toSub(16)}`;
+	const finalString = firstString + "\n<b>Binary to Hexadecimal:</b>\n" + finalWorking + `\n\n${firstConversion.oldBase + toSub(8)} = ${finalConversion.newBase + toSub(16)}`;
 
 	return finalString;
 }
@@ -482,7 +481,7 @@ function octToHex(octal){ // Currently Broken
 function decToBin(decimal, signed, bits){
 	const finalConversion = workingSteps(decimal, 10, 2, signed, bits);
 	const working = finalConversion.working.join("\n");
-	const finalString = `Convert from Decimal to Binary:\n${working}\n${finalConversion.oldBase + toSub(10)} = ${finalConversion.newBase + toSub(2)}`;
+	const finalString = `<b>Decimal to Binary:</b>\n${working}\n${finalConversion.oldBase + toSub(10)} = ${finalConversion.newBase + toSub(2)}`;
 	return finalString;
 }
 
@@ -494,11 +493,11 @@ function decToBin(decimal, signed, bits){
 function decToOct(decimal, signed, bits){
 	const firstConversion = workingSteps(decimal, 10, 2, signed, bits); // Convert to binary
 	const firstWorking = firstConversion.working.join("\n");
-	const firstString = `Convert from Decimal to Binary:\n${firstWorking}\n${firstConversion.oldBase + toSub(10)} = ${firstConversion.newBase + toSub(2)}\n`;
+	const firstString = `<b>Decimal to Binary:</b>\n${firstWorking}\n${firstConversion.oldBase + toSub(10)} = ${firstConversion.newBase + toSub(2)}\n`;
 
 	const finalConversion = workingSteps(firstConversion.newBase, 2, 8); // Convert to octal
 	const finalWorking = finalConversion.working.join("\n");
-	const finalString = firstString + "\nConvert from Binary to Octal\n" + finalWorking + `\n${firstConversion.oldBase + toSub(10)} = ${finalConversion.newBase + toSub(8)}`;
+	const finalString = firstString + "\n<b>Binary to Octal:</b>\n" + finalWorking + `\n${firstConversion.oldBase + toSub(10)} = ${finalConversion.newBase + toSub(8)}`;
 	return finalString;
 }
 
@@ -510,11 +509,11 @@ function decToOct(decimal, signed, bits){
 function decToHex(decimal, signed, bits){
 	const firstConversion = workingSteps(decimal, 10, 2, signed, bits); // Convert to binary
 	const firstWorking = firstConversion.working.join("\n");
-	const firstString = `Convert from Decimal to Binary:\n${firstWorking}\n${firstConversion.oldBase + toSub(10)} = ${firstConversion.newBase + toSub(2)}\n`;
+	const firstString = `<b>Decimal to Binary:</b>\n${firstWorking}\n${firstConversion.oldBase + toSub(10)} = ${firstConversion.newBase + toSub(2)}\n`;
 
 	const finalConversion = workingSteps(firstConversion.newBase, 2, 16);
 	const finalWorking = finalConversion.working.join("\n");
-	const finalString = firstString + "\nConvert from Binary to HEX\n" + finalWorking + `\n${firstConversion.oldBase + toSub(10)} = ${finalConversion.newBase + toSub(16)}`;
+	const finalString = firstString + "\n<b>Binary to Hexadecimal:</b>\n" + finalWorking + `\n${firstConversion.oldBase + toSub(10)} = ${finalConversion.newBase + toSub(16)}`;
 	return finalString;
 }
 
@@ -529,7 +528,7 @@ function decToHex(decimal, signed, bits){
 function hexToBin(hex){
 	const finalConversion = workingSteps(hex, 16, 2);
 	const working = finalConversion.working.join("\n");
-	const finalString = `Convert from HEX to Binary:\n${working}\n${finalConversion.oldBase + toSub(16)} = ${finalConversion.newBase + toSub(2)}`;
+	const finalString = `<b>HEX to Binary:</b>\n${working}\n${finalConversion.oldBase + toSub(16)} = ${finalConversion.newBase + toSub(2)}`;
 	return finalString;
 }
 
@@ -542,11 +541,11 @@ function hexToOct(hex){
 	// Convert to binary, show working, then convert to octal and show working
 	const firstConversion = workingSteps(hex, 16, 2); // Convert to binary
 	const firstWorking = firstConversion.working.join("\n");
-	const firstString = `Convert from HEX to Binary:\n${firstWorking}\n${firstConversion.oldBase + toSub(16)} = ${firstConversion.newBase + toSub(2)}\n`;
+	const firstString = `<b>HEX to Binary:</b>\n${firstWorking}\n${firstConversion.oldBase + toSub(16)} = ${firstConversion.newBase + toSub(2)}\n`;
 
 	const finalConversion = workingSteps(firstConversion.newBase, 2, 8, true); // Convert to hex
 	const finalWorking = finalConversion.working.join("\n");
-	const finalString = firstString + "\nConvert from Binary to Octal\n" + finalWorking + `\n\n${firstConversion.oldBase + toSub(16)} = ${finalConversion.newBase + toSub(8)}`;
+	const finalString = firstString + "\n<b>Binary to Octal:</b>\n" + finalWorking + `\n\n${firstConversion.oldBase + toSub(16)} = ${finalConversion.newBase + toSub(8)}`;
 
 	return finalString;
 }
@@ -561,7 +560,7 @@ function hexToDec(hex, signed){
 	// Convert to binary, show working, then convert to decimal and show working
 	const firstConversion = workingSteps(hex, 16, 2); // Convert to binary
 	const firstWorking = firstConversion.working.join("\n");
-	const firstString = `Convert from HEX to Binary:\n${firstWorking}\n${firstConversion.oldBase + toSub(16)} = ${firstConversion.newBase + toSub(2)}\n`;
+	const firstString = `<b>HEX to Binary:</b>\n${firstWorking}\n${firstConversion.oldBase + toSub(16)} = ${firstConversion.newBase + toSub(2)}\n`;
 
 	const finalConversion = workingSteps(firstConversion.newBase, 2, 10, signed); // Convert to decimal
 	finalConversion.working.push(finalConversion.newBase);
@@ -570,7 +569,7 @@ function hexToDec(hex, signed){
 	equals = "\n" + equals + " = ";
 
 	const finalWorking = `${finalConversion.oldBase} = ` + finalConversion.working.join(equals);
-	const finalString = firstString + "\nConvert from Binary to Decimal:\n" + finalWorking + `\n\n${firstConversion.oldBase + toSub(16)} = ${finalConversion.newBase + toSub(10)}`;
+	const finalString = firstString + "\n<b>Binary to Decimal:</b>\n" + finalWorking + `\n\n${firstConversion.oldBase + toSub(16)} = ${finalConversion.newBase + toSub(10)}`;
 
 	return finalString;
 }
@@ -797,36 +796,19 @@ try {
 } catch (e){ null; }
 
 
-function clearNewVal(){
-	const binElem = document.getElementById("bin");
-	const octElem = document.getElementById("oct");
-	const decElem = document.getElementById("dec");
-	const hexElem = document.getElementById("hex");
-
-	binElem.innerHTML = binElem.dataset.content;
-	binElem.dataset.content = " ";
-
-	octElem.innerHTML = octElem.dataset.content;
-	octElem.dataset.content = " ";
-
-	decElem.innerHTML = decElem.dataset.content;
-	decElem.dataset.content = " ";
-
-	hexElem.innerHTML = hexElem.dataset.content;
-	hexElem.dataset.content = " ";
-
-	setTimeout(() => {
-		binElem.classList.remove("fade");
-		octElem.classList.remove("fade");
-		decElem.classList.remove("fade");
-		hexElem.classList.remove("fade");
-	}, 650);
-}
-
 // Convert and Show the working for each base
 function convertToBases(){
 	const fromBase = document.getElementById("fromBase").value.toString();
 	const value = document.getElementById("ipt_baseConversion").value.toString();
+
+	let signed;
+	const signedElems = document.getElementsByName("signed");
+	for(const element of signedElems){
+		console.log(typeof element.value);
+		if(element.checked) signed = element.value;
+	}
+	signed = (signed === "true");
+
 	if(!value) return;
 
 	let bin, oct, dec, hex;
@@ -834,31 +816,31 @@ function convertToBases(){
 	const lineBreak = /\n/g;
 	switch(fromBase){
 		case "2":
-			bin = `Binary to Binary:<br>${value}₂ = ${value}₂`;
+			bin = `<b>Binary:</b><br>${value}₂ = ${value}₂`;
 			oct = binToOct(value).replace(lineBreak, "<br>");
-			dec = binToDec(value).replace(lineBreak, "<br>");
+			dec = binToDec(value, signed).replace(lineBreak, "<br>");
 			hex = binToHex(value).replace(lineBreak, "<br>");
 			break;
 
 		case "8":
 			bin = octToBin(value).replace(lineBreak, "<br>");
-			oct = `Octal to Octal:<br>${value}₈ = ${value}₈`;
-			dec = octToDec(value).replace(lineBreak, "<br>");
+			oct = `<b>Octal:</b><br>${value}₈ = ${value}₈`;
+			dec = octToDec(value, signed).replace(lineBreak, "<br>");
 			hex = octToHex(value).replace(lineBreak, "<br>");
 			break;
 
 		case "10":
-			bin = decToBin(value).replace(lineBreak, "<br>");
-			oct = decToOct(value).replace(lineBreak, "<br>");
-			dec = `Decmial to Decimal:<br>${value}₁₀ = ${value}₁₀`;
-			hex = decToHex(value).replace(lineBreak, "<br>");
+			bin = decToBin(value, signed).replace(lineBreak, "<br>");
+			oct = decToOct(value, signed).replace(lineBreak, "<br>");
+			dec = `<b>Decimal:</b><br>${value}₁₀ = ${value}₁₀`;
+			hex = decToHex(value, signed).replace(lineBreak, "<br>");
 			break;
 
 		case "16":
 			bin = hexToBin(value).replace(lineBreak, "<br>");
 			oct = hexToOct(value).replace(lineBreak, "<br>");
-			dec = hexToDec(value).replace(lineBreak, "<br>");
-			hex = `Hex to Hex:<br>${value}₁₆ = ${value}₁₆`;
+			dec = hexToDec(value, signed).replace(lineBreak, "<br>");
+			hex = `<b>Hexadecimal:</b><br>${value}₁₆ = ${value}₁₆`;
 			break;
 	}
 
@@ -867,17 +849,22 @@ function convertToBases(){
 	const decElem = document.getElementById("dec");
 	const hexElem = document.getElementById("hex");
 
-	binElem.dataset.content = bin;
 	binElem.classList.add("fade");
-
-	octElem.dataset.content = oct;
 	octElem.classList.add("fade");
-
-	decElem.dataset.content = dec;
 	decElem.classList.add("fade");
-
-	hexElem.dataset.content = hex;
 	hexElem.classList.add("fade");
 
-	setTimeout(clearNewVal, 500);
+	setTimeout(() => {
+		binElem.innerHTML = bin;
+		octElem.innerHTML = oct;
+		decElem.innerHTML = dec;
+		hexElem.innerHTML = hex;
+	}, 490);
+
+	setTimeout(() => {
+		binElem.classList.remove("fade");
+		octElem.classList.remove("fade");
+		decElem.classList.remove("fade");
+		hexElem.classList.remove("fade");
+	}, 520);
 }

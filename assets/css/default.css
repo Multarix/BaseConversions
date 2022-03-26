@@ -88,6 +88,7 @@ div.embed:hover {
 		width: 100%;
 	}
 }
+
 @media screen and (max-width: 400px) {
 	.embedLeft {
 		width: 100%;
@@ -104,7 +105,6 @@ div.embed:hover {
 	}
 }
 
-
 p.conversion {
 	text-align: justify;
 	content: "";
@@ -120,9 +120,12 @@ p.conversion::after {
 	animation: fadeOutIn 1s ease-in-out forwards;
 }
 
-
 @keyframes fadeOutIn {
 	100% { opacity: 100%; }
 	50% { opacity: 0%; }
 	0% { opacity: 100%; }
+}
+
+.radioBtn {
+	padding: 5px;
 }
