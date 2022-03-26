@@ -45,9 +45,6 @@ div.embed:hover {
 	border-left: 4px solid #764740;
 	transition: 500ms;
 }
-.showHide {
-	display: none;
-}
 
 .embedLeft {
 	padding: 5px;
@@ -105,15 +102,10 @@ div.embed:hover {
 	}
 }
 
-p.conversion {
-	text-align: justify;
-	content: "";
-}
-
-p.conversion::after {
-	text-align: justify;
-	/* content: attr(data-content); */
-	
+.conversion {
+	text-align: left;
+	word-spacing: 2px;
+	font-family: monospace;
 }
 
 .fade {
@@ -122,10 +114,48 @@ p.conversion::after {
 
 @keyframes fadeOutIn {
 	100% { opacity: 100%; }
-	50% { opacity: 0%; }
+	51% { opacity: 0%; }
+	50% { content: attr(data-value); }
+	49% { opacity: 0%; }
 	0% { opacity: 100%; }
 }
 
-.radioBtn {
-	padding: 5px;
+.inputArea {
+	padding: 20px;
+	background-color: #515151;
+	border-radius: 10px;
+	width: 70%;
+	margin: auto;
+}
+
+div.inputArea br {
+	display: block;
+	content: "";
+	margin-top: 7px;
+}
+
+.manualInput {
+	width: 150px;
+	border-width: 2px;
+	border-radius: 5px;
+	color: black;
+	border-color: black;
+}
+
+.manualInput:invalid {
+	color: red;
+	border-color: red;
+}
+
+/* .manualInput:required {
+	color: black;
+	border-color: black;
+} */
+
+.error {
+	border-color: transparent;
+}
+
+.hidden {
+	display: none;
 }
