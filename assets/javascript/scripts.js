@@ -32,8 +32,13 @@ if(page) activeNavBar(page);
 function showHide(elementID, bool){
 	const element = document.getElementById(elementID);
 	if(!element) return;
-	if(bool){ // True - Show the item
+	// True - Show the item
+	if(bool){
 		if(element.classList.contains("hidden")) return element.classList.remove("hidden");
-	} // False - Hide the item
-	if(!element.classList.contains("hidden")) element.classList.add("hidden");
+		return;
+	}
+	// False - Hide the item
+	if(!element.classList.contains("hidden")){
+		return element.classList.add("hidden");
+	}
 }

@@ -150,13 +150,14 @@ div.inputArea br {
 select.dropDownInput {
 	min-width: 150px;
 	border-width: 2px;
-	border-radius: 5px;
+	border-radius: 3px;
 	color: black;
 	border-color: black;
 }
 
 .error {
-	border-color: transparent;
+	font-weight: bold;
+	color: rgb(238, 109, 109);
 }
 
 .hidden {

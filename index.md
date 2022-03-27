@@ -1,40 +1,42 @@
 <script>const page = "home"</script>
 <script defer src="{{ site.baseurl }}/assets/javascript/baseConversion.js"></script>
+<script defer src="{{ site.baseurl }}/assets/javascript/scripts-conversions.js"></script>
 <h1><center><b>Base Converions</b></center></h1>
 <div class="conversionArea divCenter">
 	<div class="inputArea">
 		<div class="input">
 			Input Format: 
 			<select class="dropDownInput" name = "fromBase" id="fromBase">
-				<option value="2">Binary (Base 2)</option>
-				<option value="8">Octal (Base 8)</option>
-				<option value="10" selected="true">Decimal (Base 10)</option>
-				<option value="16">Hexadecimal (Base 16)</option>
+				<option value="2">Binary</option>
+				<option value="8">Octal</option>
+				<option value="10" selected="true">Decimal</option>
+				<option value="16">Hexadecimal</option>
 			</select>
 		</div><br>
 		<div class="input">
 			<label>
-				<input type="radio" name="signed" value="true" onclick="showHide('numBits', true)"> Signed
+				<input type="radio" name="signed" value="true" onclick="updateInputField()"> Signed
 			</label>
 			&nbsp;&nbsp;
 			<label>
-				<input type="radio" name="signed" value="false" onclick="showHide('numBits', false)" checked="checked"> Unsigned
+				<input type="radio" name="signed" value="false" onclick="updateInputField()" checked="checked"> Unsigned
 			</label>
 		</div><br>
 		<div class="input hidden" id="numBits">
 			Bits: 
-			<select class="dropDownInput" name = "totalBits" id="totalBits">
-				<option value="8">6</option>
+			<select class="dropDownInput" name="totalBits" id="totalBits">
+				<option value="8">8</option>
 				<option value="12">12</option>
 				<option value="16" selected="true">16</option>
-				<option value="24" selected="true">16</option>
+				<option value="24">24</option>
 				<option value="32">32</option>
 			</select>
 		</div><br>
 		<div class="input">
-			<input class="manualInput" type="text" pattern="^(-)?[0-9]+" id="input_baseConversion" value="104" placeholder="Enter a decimal number" required>
-			<button id="btn_baseConversion" class="btn_convert" onclick="convertToBases()">Convert</button><br>
+			<input class="manualInput" type="number" id="input_baseConversion" data-value="104" data-signed="false" data-bits="16" data-base="10" value="104" placeholder="Input number" required>
+			<button id="btn_baseConversion" class="btn_convert" onclick="convertSubmit()">Convert</button><br>
 		</div>
+		<div class="error hidden" id="error"></div>
 	</div><br>
 	<div class="conversionContainer" id="binaryContainer">
 		<h3><b>Binary</b></h3>
