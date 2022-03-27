@@ -20,7 +20,7 @@ function checkIfSigned(){
 
 
 // Update the input field regardless of what was changed
-function updateInputField(clear){
+function updateInputField(event, clear){
 	const inputField = document.getElementById("input_baseConversion");
 
 	const fromBase = Number.parseInt(document.getElementById("fromBase").value);
@@ -80,8 +80,8 @@ function bitsChange(){
 
 
 // Function to run when the base input type is changed
-function changeBase(){
-	updateInputField(true);
+function changeBase(event){
+	updateInputField(null, true);
 	const value = this.value;
 
 	const baseIDS = [
