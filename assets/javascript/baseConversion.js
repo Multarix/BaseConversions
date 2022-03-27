@@ -1,15 +1,15 @@
-const supScript = {
-	"0": "⁰",
-	"1": "¹",
-	"2": "²",
-	"3": "³",
-	"4": "⁴",
-	"5": "⁵",
-	"6": "⁶",
-	"7": "⁷",
-	"8": "⁸",
-	"9": "⁹"
-};
+// const supScript = {
+// 	"0": "⁰",
+// 	"1": "¹",
+// 	"2": "²",
+// 	"3": "³",
+// 	"4": "⁴",
+// 	"5": "⁵",
+// 	"6": "⁶",
+// 	"7": "⁷",
+// 	"8": "⁸",
+// 	"9": "⁹"
+// };
 
 const subScript = {
 	"2": "₂",
@@ -104,13 +104,7 @@ const binaryOctalObject = {
  *  @argument {number} n The number to convert
 **/
 function toSup(n){
-	const str = n.toString();
-	const strArr = str.split("");
-	let newStr = "";
-	for(const num of strArr){
-		newStr += supScript[num];
-	}
-	return newStr;
+	return `<sup>${n}</sup>`;
 }
 
 /**
@@ -118,8 +112,7 @@ function toSup(n){
  *  @argument {number} n The number to convert
 **/
 function toSub(n){
-	const str = n.toString();
-	return subScript[str];
+	return `<sub>${n}</sub>`;
 }
 
 
@@ -627,7 +620,7 @@ function changeConversion(){
 	let pattern;
 	if(value === "2") pattern = "[01]+";
 	if(value === "8") pattern = "[0-7]+";
-	if(value === "10") pattern = "[0-9]+";
+	if(value === "10") pattern = "^(-)?[0-9]+";
 	if(value === "16") pattern = "[0-9A-Fa-f]+";
 	inputField.pattern = pattern;
 }
@@ -644,11 +637,14 @@ function convertToBases(){
 
 	const inputField = document.getElementById("input_baseConversion");
 
-	const pattern = `[^${inputField.pattern.slice(1)}`;
+	const pattern = (fromBase === "10") ? `^[-]?[^0-9]+` : `[^${inputField.pattern.slice(1)}`;
 	const reg = new RegExp(pattern, "g");
 	const regArray = value.match(reg);
 
-	if(!value || regArray?.length > 0 || parseInt(value) === 0) return inputField.value = ""; // Remove values from the input
+	let maxMatches = 0;
+	if(fromBase === "10" && parseInt(value) < 0) maxMatches = 1; // If the base number is 10 and the value is less than 0
+
+	if(!value || regArray?.length > maxMatches || parseInt(value) === 0) return inputField.value = ""; // Remove values from the input
 
 	let signed;
 	const signedElems = document.getElementsByName("signed");
@@ -656,7 +652,6 @@ function convertToBases(){
 		if(element.checked) signed = element.value;
 	}
 	signed = (signed === "true");
-
 
 	let bin, oct, dec, hex;
 

@@ -32,7 +32,7 @@
 			</select>
 		</div><br>
 		<div class="input">
-			<input class="manualInput" type="text" pattern="[0-9]+" id="input_baseConversion" value="104" placeholder="Enter a decimal number" required>
+			<input class="manualInput" type="text" pattern="^(-)?[0-9]+" id="input_baseConversion" value="104" placeholder="Enter a decimal number" required>
 			<button id="btn_baseConversion" class="btn_convert" onclick="convertToBases()">Convert</button><br>
 		</div>
 	</div><br>
@@ -49,7 +49,7 @@
 				3 <i>mod</i> 2 = 1<br>
 				1 <i>mod</i> 2 = 1<br>
 				<br>
-				104₁₀ = 1101000₂
+				104<sub>10</sub> = 1101000<sub>2</sub>
 			</p>
 		</div>
 		<br>
@@ -67,7 +67,7 @@
 				3 <i>mod</i> 2 = 1<br>
 				1 <i>mod</i> 2 = 1<br>
 				<br>
-				104₁₀ = 1101000₂<br>
+				104<sub>10</sub> = 1101000<sub>2</sub><br>
 				<br>
 				<b>Binary to Octal:</b><br>
 				1101000 = 001-101-000<br>
@@ -75,7 +75,7 @@
 				101 = 5<br>
 				000 = 0<br>
 				<br>
-				104₁₀ = 150₈
+				104<sub>10</sub> = 150<sub>8</sub>
 			</p>
 		</div>
 		<br>
@@ -85,7 +85,7 @@
 		<div class="embed divCenter">
 			<p class="conversion" id="dec">
 				<b>Decimal:</b><br>
-				104₁₀ = 104₁₀
+				104<sub>10</sub> = 104<sub>10</sub>
 			</p>
 		</div>
 		<br>
@@ -103,14 +103,14 @@
 				3 <i>mod</i> 2 = 1<br>
 				1 <i>mod</i> 2 = 1<br>
 				<br>
-				104₁₀ = 1101000₂<br>
+				104<sub>10</sub> = 1101000<sub>2</sub><br>
 				<br>
 				<b>Binary to Hexadecimal:</b><br>
 				1101000 = 0110-1000<br>
 				0110 = 6<br>
 				1000 = 8<br>
 				<br>
-				104₁₀ = 68₁₆
+				104<sub>10</sub> = 68<sub>16</sub>
 			</p>
 		</div>
 		<br>

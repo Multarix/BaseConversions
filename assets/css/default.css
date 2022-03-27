@@ -147,10 +147,13 @@ div.inputArea br {
 	border-color: red;
 }
 
-/* .manualInput:required {
+select.dropDownInput {
+	min-width: 150px;
+	border-width: 2px;
+	border-radius: 5px;
 	color: black;
 	border-color: black;
-} */
+}
 
 .error {
 	border-color: transparent;
