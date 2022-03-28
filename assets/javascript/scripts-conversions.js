@@ -18,7 +18,6 @@ function checkIfSigned(){
 	return signed;
 }
 
-
 // Update the input field regardless of what was changed
 function updateInputField(event, clear){
 	const inputField = document.getElementById("input_baseConversion");
@@ -27,7 +26,7 @@ function updateInputField(event, clear){
 	const signed = checkIfSigned();
 	const totalBits = Number.parseInt(document.getElementById("totalBits").value);
 
-	showHide('numBits', signed);
+	showHide('numBits', (fromBase === 10 && signed));
 
 	if(fromBase === 10){ // Base 10 is somewhat special
 		inputField.removeAttribute("pattern");
@@ -73,6 +72,7 @@ function updateInputField(event, clear){
 
 
 // Function to run when the base input type is changed
+// Need to make it so num of bits is hidden when toBase !== 10
 function changeBase(event){
 	updateInputField(null, true);
 	const value = this.value;
@@ -93,7 +93,12 @@ function changeBase(event){
 
 
 // Check if the there is an error with the inputs and if so what type
-function checkIfError(value, regArray, maxMatches, signed, numBits){
+function checkIfError(value, regArray, maxMatches){
+	const fromBase = document.getElementById("fromBase").value;
+	const signed = checkIfSigned();
+	const bitValue = document.getElementById("totalBits").value;
+	const numBits = (signed) ? parseInt(bitValue) : false;
+
 	const error = { type: 0, message: "" };
 	if(!value){
 		error.type = 1;
@@ -110,11 +115,13 @@ function checkIfError(value, regArray, maxMatches, signed, numBits){
 		error.message = "Error: Number contains invalid characters";
 		return error;
 	}
-	// If signed && value is smaller than min || signed && value is greater than max
-	if((signed && value < bitMax[numBits][0]) || (signed && value > bitMax[numBits][1])){
-		error.type = 1;
-		error.message = "Error: Number is outside of range";
-		return error;
+	if(fromBase === 10){
+		// If signed && value is smaller than min || signed && value is greater than max
+		if((signed && value < bitMax[numBits][0]) || (signed && value > bitMax[numBits][1])){
+			error.type = 1;
+			error.message = "Error: Number is outside of range";
+			return error;
+		}
 	}
 	return error;
 }
@@ -159,7 +166,7 @@ function convertSubmit(){
 	if(fromBase === "10") maxMatches = Infinity; // If the base is 10 and the value is less than 0
 
 	// Input error handling
-	const error = checkIfError(value, regArray, maxMatches, signed, numBits);
+	const error = checkIfError(value, regArray, maxMatches);
 	if(error.type !== 0) return doErrorHandling(error, inputField);
 	showHide("error", false);
 	document.getElementById("error").innerHTML = "";

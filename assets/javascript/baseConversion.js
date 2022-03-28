@@ -149,10 +149,6 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 	}
 	const [finalWorking, conversion, conversionWorking] = [[], [], []];
 
-
-	// Negative handling here.
-	// Convert numbers to binary, then convert every 3bits (octal) or 4bits (hex). (Correct way, no mention of negative octals or hex)
-
 	// Signed binary inversion
 	let negative = false;
 	let numA = num;
@@ -170,6 +166,8 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 
 	let convertedBase;
 	let baseRemainder = num;
+
+	// Decimal to binary
 	if(toBase === 2 && fromBase === 10){
 		// Handle negative numbers - Need to add working steps
 		if(toBase === 2 && numA < 0){
@@ -196,17 +194,24 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 		conversion.reverse();
 		convertedBase = conversion.join("");
 
-		// Negative binary handling here - Need to add working steps
-		if(toBase === 2 && negative){
-			const convertString = convertedBase;
-			const baseLength = convertedBase.length;
-			for(let i = bits; i > (baseLength + 1); i--){
-				convertedBase = "0" + convertedBase;
+
+		// Negative binary handling here
+		if(signed){
+			if(negative){
+				while(bits - 1 > convertedBase.length){
+					convertedBase = "0" + convertedBase;
+				}
+				const convertString = convertedBase;
+				convertedBase = binaryInvert(convertedBase);
+				conversionWorking.push(`${convertString} invert ${convertedBase}`);
+				convertedBase = "1" + convertedBase;
+				conversionWorking.push(convertedBase + " (Add bit sign)");
+
+			} else { // Else keyword is bad, but sometimes making use of it is better than not
+				while(bits > convertedBase.length){
+					convertedBase = "0" + convertedBase;
+				}
 			}
-			convertedBase = binaryInvert(convertedBase);
-			conversionWorking.push(`${convertString} invert ${convertedBase}`);
-			convertedBase = "1" + convertedBase;
-			conversionWorking.push(convertedBase + " (Add bit sign)");
 		}
 
 		finalWorking.push(...conversionWorking);
@@ -218,6 +223,7 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 		};
 	}
 
+	// Binary to decimal
 	if(toBase === 10 && fromBase === 2){
 		const splitNum = numA.split("");
 		const maxPower = splitNum.length - 1;
@@ -284,6 +290,8 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 	}
 
 
+
+	// Hex to binary
 	let regex = /.{1,4}/g;
 	if(fromBase === 16 && toBase === 2){
 		// convert from hex to binary
@@ -306,6 +314,7 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 		};
 	}
 
+	// Binary to hex
 	if(fromBase === 2 && toBase === 16){
 		// convert from binary to hex
 		let moddedNum = num;
@@ -332,6 +341,8 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 	}
 
 
+
+	// Octal to binary
 	regex = /.{1,3}/g;
 	if(fromBase === 8 && toBase === 2){
 		// convert from octal to binary
@@ -353,6 +364,7 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 		};
 	}
 
+	// Binary to octal
 	if(fromBase === 2 && toBase === 8){
 		// convert from binary to octal
 		let moddedNum = num;
@@ -376,9 +388,9 @@ function workingSteps(num, fromBase, toBase, signed, bits){
 			"working": finalWorking
 		};
 	}
-
 	// Octal to HEX and vice versa are not possible; Convert to binary instead.
 }
+
 
 
 // Binary
