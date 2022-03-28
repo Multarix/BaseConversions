@@ -33,7 +33,7 @@
 			</select>
 		</div><br>
 		<div class="input">
-			<input class="manualInput" type="number" id="input_baseConversion" data-value="104" data-signed="false" data-bits="16" data-base="10" value="104" placeholder="Input number" required>
+			<input class="manualInput" type="number" id="input_baseConversion" data-value="104" data-signed="false" data-bits="false" data-base="10" value="104" placeholder="Input number" required>
 			<button id="btn_baseConversion" class="btn_convert" onclick="convertSubmit()">Convert</button><br>
 		</div>
 		<div class="error hidden" id="error"></div>

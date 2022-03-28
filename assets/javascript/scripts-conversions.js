@@ -72,13 +72,6 @@ function updateInputField(event, clear){
 
 
 
-// Function to run when the bits value gets changed
-function bitsChange(){
-	return updateInputField();
-}
-
-
-
 // Function to run when the base input type is changed
 function changeBase(event){
 	updateInputField(null, true);
@@ -138,15 +131,25 @@ function doErrorHandling(error, inputField){
 // Convert and Show the working for each base after pressing the "convert" button
 function convertSubmit(){
 	const inputField = document.getElementById("input_baseConversion");
-	const value = inputField.value.toString();
-	if(inputField.dataset.oldvalue.toString() === value) return;
-	inputField.dataset.oldvalue = value;
-
-	const fromBase = document.getElementById("fromBase").value.toString();
+	const fromBase = document.getElementById("fromBase").value;
 	const signed = checkIfSigned();
 
-	const bitValue = document.getElementById("totalBits").value.toString();
+	const bitValue = document.getElementById("totalBits").value;
 	const numBits = (signed) ? parseInt(bitValue) : false;
+
+	const value = inputField.value;
+
+	const dataValue = inputField.dataset.value;
+	const dataSigned = inputField.dataset.signed;
+	const dataBits = inputField.dataset.bits;
+	const dataBase = inputField.dataset.base;
+
+	if(dataValue === value.toString() && dataBase === fromBase.toString() && dataSigned === signed.toString() && dataBits === numBits.toString()) return;
+	inputField.dataset.value = value;
+	inputField.dataset.base = fromBase;
+	inputField.dataset.signed = signed;
+	inputField.dataset.bits = numBits;
+
 
 	const pattern = (fromBase !== "10") ? `[^${inputField.pattern.slice(1)}` : ".*?";
 	const reg = new RegExp(pattern, "g");
