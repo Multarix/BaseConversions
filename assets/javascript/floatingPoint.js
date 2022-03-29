@@ -62,7 +62,7 @@ function floatToDec(bin, expLength){
  * @returns {string} The binary exponant form
 **/
 function decToFloat(num, totalBits, expLength){
-	const standard32Bit = !!(totalBits === 32 && expLength === 8);
+	const standard32Bit = !!(parseInt(totalBits) === 32 && parseInt(expLength) === 8);
 
 	// Deal with when the number is exactly 0
 	if(num === 0){
@@ -149,3 +149,13 @@ function decToFloat(num, totalBits, expLength){
 
 	return fullBinary;
 }
+
+
+// const num = 10.10;
+// const leng = 32;
+// const exp = 8;
+
+// Number | Total bits | Exponant length
+// console.log(decToFloat(num, leng, exp));
+// Binary | Exponant length
+// console.log("\n", "Converted Binary:", floatToDec(decToFloat(num, leng, exp), exp));

@@ -40,7 +40,7 @@
 	</div><br>
 	<div class="conversionContainer" id="binaryContainer">
 		<h3><b>Binary</b></h3>
-		<div class="embed divCenter">
+		<div class="output divCenter">
 			<p class="conversion" id="bin">
 				<b>Decimal to Binary:</b><br>
 				104 <i>mod</i> 2 = 0<br>
@@ -58,7 +58,7 @@
 	</div>
 	<div class="conversionContainer" id="octalContainer">
 		<h3><b>Octal</b></h3>
-		<div class="embed divCenter">
+		<div class="output divCenter">
 			<p class="conversion" id="oct">
 				<b>Decimal to Binary:</b><br>
 				104 <i>mod</i> 2 = 0<br>
@@ -84,7 +84,7 @@
 	</div>
 	<div class="conversionContainer hidden" id="decimalContainer">
 		<h3><b>Decimal</b></h3>
-		<div class="embed divCenter">
+		<div class="output divCenter">
 			<p class="conversion" id="dec">
 				<b>Decimal:</b><br>
 				104<sub>10</sub> = 104<sub>10</sub>
@@ -94,7 +94,7 @@
 	</div>
 	<div class="conversionContainer" id="hexadecimalContainer">
 		<h3><b>Hexadecimal</b></h3>
-		<div class="embed divCenter">
+		<div class="output divCenter">
 			<p class="conversion" id="hex">
 				<b>Decimal to Binary:</b><br>
 				104 <i>mod</i> 2 = 0<br>

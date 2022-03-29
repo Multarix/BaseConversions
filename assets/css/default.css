@@ -46,61 +46,6 @@ div.embed:hover {
 	transition: 500ms;
 }
 
-.embedLeft {
-	padding: 5px;
-	text-align: left;
-	float: left;
-	width: 40%;
-	display: inline-flex;
-}
-
-.embedRight {
-	text-align: left;
-	float: left;
-	width: 50%;
-	display: inline-flex;
-}
-.embedRow:after {
-	content: "";
-	display: table;
-	clear: both;
-}
-
-@media screen and (max-width: 800px) {
-	.columRow {
-		width: auto;
-	}
-	.left {
-		width: auto;
-	}
-	.middle ul, .right ul {
-		margin: 0;
-		overflow: auto;
-	}
-
-	.middle, .right {
-		padding: 0;
-		margin-left: 0;
-		float: none;
-		width: 100%;
-	}
-}
-
-@media screen and (max-width: 400px) {
-	.embedLeft {
-		width: 100%;
-		text-align: left;
-		margin: 0;
-	}
-	.embedLeft ul {
-		margin: 0;
-	}
-	.embedRight {
-		float: left;
-		width: 100%;
-		text-align: left;
-	}
-}
 
 .conversion {
 	text-align: left;
@@ -120,12 +65,37 @@ div.embed:hover {
 	0% { opacity: 100%; }
 }
 
-.inputArea {
-	padding: 20px;
+div.output {
 	background-color: #515151;
-	border-radius: 10px;
-	width: 70%;
+
+	width: 80%;
 	margin: auto;
+
+	padding-left: 25px;
+	padding-right: 15px;
+	padding-top: 20px;
+	padding-bottom: 1px;
+	
+	border-color: #303030;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 10px;
+
+	transition: 500ms;
+}
+
+.inputArea {
+	background-color: #5A5A5A;
+
+	width: 60%;
+	margin: auto;
+
+	border-color: #373737;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 10px;
+
+	padding: 20px;
 }
 
 div.inputArea br {
