@@ -1,0 +1,29 @@
+{
+	"name": "base-conversion",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "Convert between different bases while showing appropriate working.",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Multarix/baseConversions.git"
+	},
+	"author": "Multarix",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Multarix/baseConversions/issues"
+	},
+	"homepage": "https://projects.multarix.com/base-conversions",
+	"main": "dist/main.js",
+	"types": "dist/main.d.ts",
+	"devDependencies": {
+		"@types/node": "^20.1.0",
+		"@typescript-eslint/eslint-plugin": "^5.59.2",
+		"@typescript-eslint/parser": "^5.59.2",
+		"eslint": "^8.40.0",
+		"tsc-hooks": "^1.1.2"
+	},
+	"prepublish": "tsc",
+	"scripts": {
+		"build": "tsc"
+	}
+}

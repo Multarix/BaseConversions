@@ -1,9 +1,4 @@
-/**
- * Calculates the highest power of 2 that fits into a number without going over
- * @argument {number} num - The number to find the highest power of 2 in
- * @argument {boolean} signed - The current power - Only used for the recursion really
- * @returns {number} The highest power of 2 that fits into the first argument
-**/
+/** Calculates the highest power of 2 that fits into a number without going over */
 const highestPower = (num) => {
 	let i = 0;
 	while(num >= Math.pow(2, i + 1)) i += 1;
@@ -12,13 +7,8 @@ const highestPower = (num) => {
 
 
 
-/**
- * Converts a binary exponant into the stored decimal form
- * @argument {number} bin - The binary exponant
- * @argument {number} expLength - The length of the exponant/ characteristic
- * @returns {number} The final floating point/ real number as stored in the binary
-**/
-function convertToDecimal(bin, expLength){
+/** Converts a binary exponant into the stored decimal form */
+function convertToDecimal(bin, expLength) {
 	const binArray = bin.split("");
 	const sign = binArray.shift();
 
@@ -54,14 +44,8 @@ function convertToDecimal(bin, expLength){
 
 
 
-/**
- * Converts a floating point (real) number into binary exponant form
- * @argument {number} num - The floating point number to convert
- * @argument {number} totalBits - The amount of total bits that the exponant form has
- * @argument {number} expLength - The length of the exponant/ characteristic
- * @returns {string} The binary exponant form
-**/
-function convertToBinary(num, totalBits, expLength){
+/** Converts a floating point (real) number into binary exponant form */
+function convertToBinary(num, totalBits, expLength) {
 	const standard32Bit = !!(totalBits === 32 && expLength === 8);
 
 	// Deal with when the number is exactly 0
