@@ -71,10 +71,7 @@ function toBinary(int: number, bits: number, exponantLength?: number): Conversio
 	const wholeNumber = numArray[0];
 	const fractional = numArray[1];
 
-	conversion.push(`Sign Bit: ${signBit} (${isNegative ? "Negative" : "Positive"})`);
-	conversion.push(`Split whole and fractional: ${wholeNumber} | 0.${fractional}`);
-
-
+	conversion.push(`Sign Bit: ${signBit} (${isNegative ? "Negative" : "Positive"})`, `Split whole and fractional: ${wholeNumber} | 0.${fractional}`);
 
 	const wholeNumberBinary = parseInt(wholeNumber).toString(2); // Convert whole number to binary
 	conversion.push(`Whole to binary: ${wholeNumber} = ${wholeNumberBinary}`);
@@ -109,7 +106,7 @@ function toBinary(int: number, bits: number, exponantLength?: number): Conversio
 	// Remove the decimal, and slice the mantissa to the first one, then slice it up to the length of the mantissa
 	let mantissaBinary = wholePlusFractional.replace(".", "").slice(decimalShouldBeAt).slice(0, mantissaLength);
 
-	// If for some reason we didn't have enough bits to get the mantissa, add 0's to the end (rare exception)
+	// If for some reason we didn't have enough bits to get the mantissa, add 0's to the end (rare exception, will probs only happen with >32bit or really small numbers)
 	if(mantissaBinary.length < mantissaLength) mantissaBinary += "0".repeat(mantissaLength - mantissaBinary.length);
 	conversion.push(`Mantissa: ${mantissaBinary}`);
 
