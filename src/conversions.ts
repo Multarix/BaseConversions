@@ -524,6 +524,8 @@ function sDecToBin(decimal: NumberLike, bits: number): Conversion {
 	const isNegative = (signBit === "1");
 
 	const bounds = getBounds(bits);
+
+	// If the amount of bits is too small, we need to add more to fit this number
 	if(DECIMAL > bounds.upper || DECIMAL < bounds.lower){
 		const pow = nextHighestPower(DECIMAL, true);
 
