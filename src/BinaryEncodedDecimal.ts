@@ -100,10 +100,10 @@ function toBinary(int: number, bits: number, exponantLength?: number): Conversio
 	conversion.push(`Sign Bit:\n${signBit} (${isNegative ? "Negative" : "Positive"})`, `Split into whole and fraction:\n${wholeNumber} | 0.${fractional}`);
 
 	const wholeNumberBinary = parseInt(wholeNumber).toString(2); // Convert whole number to binary
-	conversion.push(`Whole as binary:\n${wholeNumber} = ${wholeNumberBinary}`);
+	conversion.push(`Whole to Base2:\n${wholeNumber} = ${wholeNumberBinary}`);
 
 	const parsedFractional = parseFloat(`0.${fractional}`).toString(2).slice(1) || ".0"; // Convert fractional to binary & remove leading 0
-	conversion.push(`Fraction as binary:\n0.${fractional} = 0${parsedFractional}`);
+	conversion.push(`Fraction to Base2:\n0.${fractional} = 0${parsedFractional}`);
 
 	const wholePlusFractional = wholeNumberBinary + parsedFractional;
 	conversion.push(`Combine Whole & Fraction: \n${wholePlusFractional}`);
@@ -118,7 +118,7 @@ function toBinary(int: number, bits: number, exponantLength?: number): Conversio
 
 	// The distance the decimal needs to move to be after the first "1"
 	const expMove = decimal - decimalShouldBeAt;
-	conversion.push(`Decimal movement:\n${expMove}`);
+	conversion.push(`Places to move decimal point:\n${expMove}`);
 
 	// The maximum that the exponant can be, based on the number of bits
 	const expAdd = getBounds(exponantLength).upper;
@@ -127,7 +127,7 @@ function toBinary(int: number, bits: number, exponantLength?: number): Conversio
 
 	let exponantBinary = exponant.toString(2);
 	if(exponantBinary.length < exponantLength) exponantBinary = "0".repeat(exponantLength - exponantBinary.length) + exponantBinary;
-	conversion.push(`Exponant to binary:\n${exponant} = ${exponantBinary}`);
+	conversion.push(`Exponant to Base2:\n${exponant} = ${exponantBinary}`);
 
 	// Remove the decimal, and slice the mantissa to the first one, then slice it up to the length of the mantissa
 	let mantissaBinary = wholePlusFractional.replace(".", "").slice(decimalShouldBeAt).slice(0, mantissaLength);
@@ -194,8 +194,8 @@ function toDecimal(bin: string, exponantLength?: number) {
 	conversion.push(
 		`Sign Bit:\n${signBit} (${isNegative ? "Negative" : "Positive"})`,
 		`Exponant:\n${exponantArray.join("")}`,
-		`Exponant to Decimal:\n${exponant}`,
-		`Find how far to move the decimal:\n${exponant} - ${expMinus} = ${exponant - expMinus}`
+		`Exponant to Base10:\n${exponant}`,
+		`Places to move decimal point:\n${exponant} - ${expMinus} = ${exponant - expMinus}`
 	);
 
 	exponant -= expMinus;
@@ -212,7 +212,7 @@ function toDecimal(bin: string, exponantLength?: number) {
 	const whole = parseInt(wholeBinary, 2);
 	const fraction = getFraction(fractionBinary);
 
-	conversion.push(`Whole as decimal:\n${whole}`, `Fraction as decimal:\n${fraction}`);
+	conversion.push(`Whole to Base10:\n${whole}`, `Fraction to Base10:\n${fraction}`);
 
 	const combined = whole + fraction;
 
