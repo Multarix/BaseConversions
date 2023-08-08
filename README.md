@@ -75,4 +75,4 @@ Converts the provided decimal number to a floating point binary number.<br>
 # The purpose of this repo
 The purpose of this repo, is/was to annoy the hell out of an idiotic maths professor. The professor insisted on forcing students to convert 12bit or 8bit signed/ floating point numbers by hand. Obviously, such a task is tedious and arguably a complete waste of time, especially when the chances of you coming across binary that is of those lengths are marginal at best. Soooo... being the petty person I am, I wrote this to do it all for me.<br>
 <br>
-Screw you proffessor! I hope your future students find this repo!
+Screw you professor! I hope your future students find this repo!
